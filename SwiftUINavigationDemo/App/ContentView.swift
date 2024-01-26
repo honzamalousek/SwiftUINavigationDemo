@@ -9,13 +9,37 @@ import Common
 import SwiftUI
 
 struct ContentView: View {
+    let rootNavigationStore = NavigationStore(
+        rootNode: HomescreenNode(),
+        parentNavigationStore: nil
+    )
+
     var body: some View {
-        NavRootView(
-            navigationStore: NavigationStore(
-                rootNode: HomescreenNode(),
-                parentNavigationStore: nil
+        ZStack {
+            NavRootView(navigationStore: rootNavigationStore)
+
+            deeplinkFAB
+        }
+    }
+
+    var deeplinkFAB: some View {
+        Circle()
+            .fill(.black)
+            .overlay(
+                Text("deeplink")
+                    .foregroundColor(.white)
             )
-        )
+            .frame(width: 80, height: 80)
+            .padding()
+            .onTapGesture {
+                rootNavigationStore.handleDeeplink(
+                    deeplink: PrefillArticlesGiftVoucherDeeplink(
+                        voucherCode: "123456789",
+                        handlerNode: ArticleDetailNode(articleId: "string")
+                    )
+                )
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
     }
 }
 

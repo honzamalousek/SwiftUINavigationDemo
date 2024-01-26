@@ -11,6 +11,7 @@ import Homescreen
 import SwiftUI
 import Common
 
+@MainActor
 public struct ViewFactory {
     @ViewBuilder
     func getView(for node: Node) -> some View {
@@ -20,7 +21,7 @@ public struct ViewFactory {
         case is CategoryNode:
             CategoryResolver().resolveView(id: "")
         case let node as ArticleDetailNode:
-            ArticleDetailResolver().resolveView(articleId: node.articleId)
+            ArticleDetailResolver().resolveView(articleNode: node)
         case is FilterNode:
             FilterResolver().resolveView()
         case is FilterTagCollectionNode:

@@ -34,6 +34,7 @@
 		7ECC4C682B62528500F9855E /* FilterTagCollectionResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECC4C672B62528500F9855E /* FilterTagCollectionResolver.swift */; };
 		7EF1CD5F2B628C2600A5324D /* FilterTagCollectionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF1CD5E2B628C2600A5324D /* FilterTagCollectionCoordinator.swift */; };
 		7EF1CD612B628CD400A5324D /* FilterTagCollectionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF1CD602B628CD400A5324D /* FilterTagCollectionNode.swift */; };
+		7EF1CD632B638E4400A5324D /* Deeplink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF1CD622B638E4400A5324D /* Deeplink.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		7ECC4C672B62528500F9855E /* FilterTagCollectionResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTagCollectionResolver.swift; sourceTree = "<group>"; };
 		7EF1CD5E2B628C2600A5324D /* FilterTagCollectionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTagCollectionCoordinator.swift; sourceTree = "<group>"; };
 		7EF1CD602B628CD400A5324D /* FilterTagCollectionNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTagCollectionNode.swift; sourceTree = "<group>"; };
+		7EF1CD622B638E4400A5324D /* Deeplink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deeplink.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 		7ECC4C2A2B61075500F9855E /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				7EF1CD622B638E4400A5324D /* Deeplink.swift */,
 				7ECC4C552B614C9400F9855E /* NavigationEvent.swift */,
 				7ECC4C2D2B61106B00F9855E /* NavRootView.swift */,
 				7ECC4C3D2B613F3A00F9855E /* Coordinators */,
@@ -283,6 +286,7 @@
 			files = (
 				7ECC4C582B62458D00F9855E /* HomescreenNode.swift in Sources */,
 				7ECC4C2E2B61106B00F9855E /* NavRootView.swift in Sources */,
+				7EF1CD632B638E4400A5324D /* Deeplink.swift in Sources */,
 				7ECC4C682B62528500F9855E /* FilterTagCollectionResolver.swift in Sources */,
 				7ECC4C522B61499700F9855E /* ArticleDetailResolver.swift in Sources */,
 				7EF1CD612B628CD400A5324D /* FilterTagCollectionNode.swift in Sources */,

@@ -22,6 +22,11 @@ open class Node: Hashable {
     ) -> Bool {
         false
     }
+    
+    open func handleDeeplink(
+        deeplink: Any,
+        navigationStore: NavigationStore
+    ) {}
 
     public func hash(into hasher: inout Hasher) {
         hasher.combine(id)

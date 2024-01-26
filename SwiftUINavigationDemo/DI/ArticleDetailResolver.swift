@@ -5,13 +5,18 @@
 //  Created by Jan Maloušek on 24.01.2024.
 //
 
+import Article
 import Categories
 import Foundation
 import SwiftUI
-import Article
 
+@MainActor
 struct ArticleDetailResolver {
-    func resolveView(articleId: String) -> some View {
-        ArticleDetailView()
+    func resolveView(articleNode: ArticleDetailNode) -> some View {
+        let articleView = ArticleDetailView()
+        let viewModel = ArticleDetailVM()
+        articleNode.deeplinkHandlerFunction.send(viewModel.setVoucher)
+        return articleView
+            .environmentObject(viewModel)
     }
 }

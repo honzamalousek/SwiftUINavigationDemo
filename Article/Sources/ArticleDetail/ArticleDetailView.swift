@@ -9,6 +9,7 @@ import SwiftUI
 
 public struct ArticleDetailView: View {
     @Environment(\.articleDetailCoordinator) private var coordinator: ArticleDetailCoordinatorLogic
+    @EnvironmentObject private var viewModel: ArticleDetailVM
     
     public init() {}
     
@@ -18,6 +19,12 @@ public struct ArticleDetailView: View {
                 .font(.title)
             
             Spacer()
+            
+            TextField("Gift voucher code", text: $viewModel.voucher)
+                .multilineTextAlignment(.center)
+            
+            Spacer()
+                .frame(height: 100)
             
             Text("back")
                 .onTapGesture {
@@ -32,6 +39,6 @@ public struct ArticleDetailView: View {
             Spacer()
         }
         .frame(maxWidth: .infinity)
-        .background(Color.gray)
+        .background(Color.white)
     }
 }
