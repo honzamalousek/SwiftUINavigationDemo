@@ -30,17 +30,4 @@ public struct ViewFactory {
             Text("Error: No Destination")
         }
     }
-    
-    @ViewBuilder
-    func getSheet(
-        for sheetRoot: Node,
-        parentNavigationStore: NavigationStore
-    ) -> some View {
-        NavRootView(
-            navigationStore: NavigationStore(
-                rootNode: sheetRoot,
-                parentNavigationStore: parentNavigationStore
-            )
-        )
-    }
 }

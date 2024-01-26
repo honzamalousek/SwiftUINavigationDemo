@@ -32,12 +32,16 @@ struct ContentView: View {
             .frame(width: 80, height: 80)
             .padding()
             .onTapGesture {
-                rootNavigationStore.handleDeeplink(
-                    deeplink: PrefillArticlesGiftVoucherDeeplink(
-                        voucherCode: "123456789",
-                        handlerNode: ArticleDetailNode(articleId: "string")
+                Task{ @MainActor in
+                    try await Task.sleep(nanoseconds: 5000000000)
+                    
+                    rootNavigationStore.handleDeeplink(
+                        deeplink: PrefillArticlesGiftVoucherDeeplink(
+                            voucherCode: "123456789",
+                            handlerNode: ArticleDetailNode(articleId: "string")
+                        )
                     )
-                )
+                }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
     }

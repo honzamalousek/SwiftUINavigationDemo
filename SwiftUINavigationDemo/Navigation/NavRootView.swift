@@ -8,10 +8,10 @@
 import Article
 import Categories
 import Common
+import Filter
 import Foundation
 import Homescreen
 import SwiftUI
-import Filter
 
 public struct NavRootView: View {
     @ObservedObject private var navigationStore: NavigationStore
@@ -30,15 +30,12 @@ public struct NavRootView: View {
                     ViewFactory().getView(for: destination)
                 }
         }
-        .onReceive(navigationStore.displayedSheet, perform: { displayedSheet in
+        .onReceive(navigationStore.childSheetNavigationStore, perform: { displayedSheet in
             isSheetPresented = displayedSheet != nil
         })
         .sheet(isPresented: $isSheetPresented) {
-            if let sheet = navigationStore.displayedSheet.value {
-                ViewFactory().getSheet(
-                    for: sheet,
-                    parentNavigationStore: navigationStore
-                )
+            if let sheet = navigationStore.childSheetNavigationStore.value {
+                NavRootView(navigationStore: sheet)
             }
         }
         .environment(\.homescreenCoordinator, navigationStore)

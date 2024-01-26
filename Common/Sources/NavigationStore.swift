@@ -14,7 +14,7 @@ public final class NavigationStore: ObservableObject {
     public weak var parentNavigationStore: NavigationStore?
 
     // displayed sheet cant be published property, otherwice on opening/closing sheet, the whole view will be redraws!
-    public let displayedSheet = CurrentValueSubject<Node?, Never>(nil)
+    public let childSheetNavigationStore = CurrentValueSubject<NavigationStore?, Never>(nil)
 
     public init(
         rootNode: Node,
@@ -25,11 +25,16 @@ public final class NavigationStore: ObservableObject {
     }
 
     public func openSheet(with sheetRoot: Node) {
-        displayedSheet.send(sheetRoot)
+        childSheetNavigationStore.send(
+            NavigationStore(
+                rootNode: sheetRoot,
+                parentNavigationStore: self
+            )
+        )
     }
 
     public func closeSheet() {
-        parentNavigationStore?.displayedSheet.send(nil)
+        parentNavigationStore?.childSheetNavigationStore.send(nil)
     }
 }
 
@@ -49,16 +54,30 @@ public extension NavigationStore {
 }
 
 public extension NavigationStore {
-    func handleDeeplink(deeplink: Deeplink) {
-        popToNode(node: deeplink.handlerNode)
-        var topNode = navigationPath.last ?? rootNode
-        
-        if topNode != deeplink.handlerNode {
-            navigationPath.append(deeplink.handlerNode)
-            topNode = deeplink.handlerNode
+    @discardableResult func handleDeeplink(deeplink: Deeplink) -> Bool {
+        if let child = childSheetNavigationStore.value {
+            if child.handleDeeplink(deeplink: deeplink) {
+                return true
+            }
         }
-        
-        topNode.handleDeeplink(deeplink: deeplink, navigationStore: self)
+
+        childSheetNavigationStore.send(nil)
+
+        if navigationPath.contains(deeplink.handlerNode) {
+            popToNode(node: deeplink.handlerNode)
+            navigationPath.last?.handleDeeplink(deeplink: deeplink, navigationStore: self)
+            return true
+        } else if rootNode == deeplink.handlerNode {
+            rootNode.handleDeeplink(deeplink: deeplink, navigationStore: self)
+            return true
+        }
+
+        if parentNavigationStore == nil {
+            navigationPath = [deeplink.handlerNode]
+            return true
+        }
+
+        return false
     }
 }
 
@@ -76,13 +95,14 @@ public extension NavigationStore {
             return
         }
 
+        closeSheet()
         parentNavigationStore?.popToNode(node: node)
     }
 }
 
 open class Deeplink {
     public let handlerNode: Node
-    
+
     public init(handlerNode: Node) {
         self.handlerNode = handlerNode
     }
