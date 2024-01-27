@@ -12,7 +12,7 @@ struct CategoryNode: Node {
     func handleDeeplink(deeplink: Any, navigationStore: NavigationStore) -> Bool {
         guard let deeplink = deeplink as? Deeplink else { return false }
         switch deeplink {
-        case let .prefilledArticleDetail(articleId, _):
+        case .prefilledArticleDetail:
             handlePrefilledArticleDetailDeeplink(
                 deeplink: deeplink,
                 navigationStore: navigationStore
