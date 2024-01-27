@@ -36,9 +36,9 @@ struct ContentView: View {
                     try await Task.sleep(nanoseconds: 5000000000)
                     
                     rootNavigationStore.handleDeeplink(
-                        deeplink: PrefillArticlesGiftVoucherDeeplink(
-                            voucherCode: "123456789",
-                            handlerNode: ArticleDetailNode(articleId: "string")
+                        deeplink: Deeplink.prefilledArticleDetail(
+                            articleId: "id1",
+                            voucherCode: "123456789"
                         )
                     )
                 }

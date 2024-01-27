@@ -8,12 +8,6 @@
 import Common
 import Foundation
 
-class PrefillArticlesGiftVoucherDeeplink: Deeplink {
-    let voucherCode: String
-
-    init(voucherCode: String, handlerNode: Node) {
-        self.voucherCode = voucherCode
-        super.init(handlerNode: handlerNode)
-    }
+enum Deeplink {
+    case prefilledArticleDetail(articleId: String, voucherCode: String)
 }
-

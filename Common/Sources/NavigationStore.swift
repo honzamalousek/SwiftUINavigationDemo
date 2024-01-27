@@ -10,7 +10,7 @@ import SwiftUI
 
 public final class NavigationStore: ObservableObject {
     @Published public var navigationPath: [Node] = []
-    public let rootNode: Node
+    @Published public var rootNode: Node
     public weak var parentNavigationStore: NavigationStore?
 
     // displayed sheet cant be published property, otherwice on opening/closing sheet, the whole view will be redraws!
@@ -54,26 +54,24 @@ public extension NavigationStore {
 }
 
 public extension NavigationStore {
-    @discardableResult func handleDeeplink(deeplink: Deeplink) -> Bool {
+    @discardableResult func handleDeeplink(deeplink: Any) -> Bool {
         if let child = childSheetNavigationStore.value {
             if child.handleDeeplink(deeplink: deeplink) {
                 return true
             }
         }
-
-        childSheetNavigationStore.send(nil)
-
-        if navigationPath.contains(deeplink.handlerNode) {
-            popToNode(node: deeplink.handlerNode)
-            navigationPath.last?.handleDeeplink(deeplink: deeplink, navigationStore: self)
-            return true
-        } else if rootNode == deeplink.handlerNode {
-            rootNode.handleDeeplink(deeplink: deeplink, navigationStore: self)
-            return true
+        
+        for node in navigationPath.reversed() {
+            if node.handleDeeplink(deeplink: deeplink, navigationStore: self) {
+                childSheetNavigationStore.send(nil)
+                return true
+            } else {
+                _ = navigationPath.popLast()
+            }
         }
-
-        if parentNavigationStore == nil {
-            navigationPath = [deeplink.handlerNode]
+        
+        if rootNode.handleDeeplink(deeplink: deeplink, navigationStore: self) {
+            childSheetNavigationStore.send(nil)
             return true
         }
 
@@ -97,13 +95,5 @@ public extension NavigationStore {
 
         closeSheet()
         parentNavigationStore?.popToNode(node: node)
-    }
-}
-
-open class Deeplink {
-    public let handlerNode: Node
-
-    public init(handlerNode: Node) {
-        self.handlerNode = handlerNode
     }
 }

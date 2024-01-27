@@ -6,7 +6,7 @@
 //
 
 open class Node: Hashable {
-    private let id: String
+    public let id: String
 
     public init(id: String? = nil) {
         if let id {
@@ -26,7 +26,9 @@ open class Node: Hashable {
     open func handleDeeplink(
         deeplink: Any,
         navigationStore: NavigationStore
-    ) {}
+    ) -> Bool {
+        false
+    }
 
     public func hash(into hasher: inout Hasher) {
         hasher.combine(id)

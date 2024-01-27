@@ -20,4 +20,33 @@ class HomescreenNode: Node {
             return true
         }
     }
+    
+    override func handleDeeplink(
+        deeplink: Any,
+        navigationStore: NavigationStore
+    ) -> Bool {
+        guard let deeplink = deeplink as? Deeplink else { return false }
+        switch deeplink {
+        case .prefilledArticleDetail:
+            handlePrefilledArticleDetailDeeplink(
+                deeplink: deeplink,
+                navigationStore: navigationStore
+            )
+            return true
+        }
+    }
+}
+
+extension HomescreenNode {
+    func handlePrefilledArticleDetailDeeplink(
+        deeplink: Deeplink,
+        navigationStore: NavigationStore
+    ) {
+        let categoryNode = CategoryNode()
+        navigationStore.navigationPath.append(categoryNode)
+        _ = categoryNode.handleDeeplink(
+            deeplink: deeplink,
+            navigationStore: navigationStore
+        )
+    }
 }

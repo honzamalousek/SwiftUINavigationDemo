@@ -17,8 +17,11 @@ public final class ArticleDetailVM: ObservableObject {
     
     // MARK: - Lifecycle
     
-    public nonisolated init(
-    ) {}
+    public init(
+        prefilledVoucher: String = ""
+    ) {
+        self.voucher = prefilledVoucher
+    }
     
     
     public func setVoucher(voucher: String) {
