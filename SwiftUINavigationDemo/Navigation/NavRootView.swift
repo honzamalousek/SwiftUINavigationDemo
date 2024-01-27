@@ -26,7 +26,7 @@ public struct NavRootView: View {
     public var body: some View {
         NavigationStack(path: $navigationStore.navigationPath) {
             ViewFactory().getView(for: navigationStore.rootNode)
-                .navigationDestination(for: Node.self) { destination in
+                .navigationDestination(for: AnyHashable.self) { destination in
                     ViewFactory().getView(for: destination)
                 }
         }

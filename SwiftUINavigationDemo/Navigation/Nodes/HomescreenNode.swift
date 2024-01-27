@@ -8,8 +8,8 @@
 import Common
 import Homescreen
 
-class HomescreenNode: Node {
-    override func handleNavigationEvent(
+struct HomescreenNode: Node {
+    func handleNavigationEvent(
         event: Any,
         navigationStore: NavigationStore
     ) -> Bool {
@@ -21,7 +21,7 @@ class HomescreenNode: Node {
         }
     }
     
-    override func handleDeeplink(
+    func handleDeeplink(
         deeplink: Any,
         navigationStore: NavigationStore
     ) -> Bool {

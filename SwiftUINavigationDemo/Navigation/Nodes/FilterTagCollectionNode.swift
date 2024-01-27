@@ -8,6 +8,4 @@
 import Common
 import Foundation
 
-class FilterTagCollectionNode: Node {
-    init() {}
-}
+struct FilterTagCollectionNode: Node {}

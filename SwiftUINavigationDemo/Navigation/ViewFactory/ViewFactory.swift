@@ -14,8 +14,8 @@ import Common
 @MainActor
 public struct ViewFactory {
     @ViewBuilder
-    func getView(for node: Node) -> some View {
-        switch node {
+    func getView(for node: AnyHashable) -> some View {
+        switch node as? any Node {
         case is HomescreenNode:
             HomescreenResolver().resolveView()
         case is CategoryNode:

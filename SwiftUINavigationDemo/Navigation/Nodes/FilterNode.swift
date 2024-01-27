@@ -5,9 +5,7 @@
 //  Created by Jan Maloušek on 25.01.2024.
 //
 
-import Foundation
 import Common
+import Foundation
 
-class FilterNode: Node {
-    init() {}
-}
+struct FilterNode: Node {}

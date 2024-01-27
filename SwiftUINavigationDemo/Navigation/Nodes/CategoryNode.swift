@@ -5,11 +5,11 @@
 //  Created by Jan Maloušek on 25.01.2024.
 //
 
-import Foundation
 import Common
+import Foundation
 
-class CategoryNode: Node {
-    override func handleDeeplink(deeplink: Any, navigationStore: NavigationStore) -> Bool {
+struct CategoryNode: Node {
+    func handleDeeplink(deeplink: Any, navigationStore: NavigationStore) -> Bool {
         guard let deeplink = deeplink as? Deeplink else { return false }
         switch deeplink {
         case let .prefilledArticleDetail(articleId, _):
@@ -28,7 +28,7 @@ extension CategoryNode {
         navigationStore: NavigationStore
     ) {
         guard case let .prefilledArticleDetail(articleId, voucher) = deeplink else { return }
-        
+
         let articleNode = ArticleDetailNode(
             articleId: articleId,
             prefilledVoucher: voucher
