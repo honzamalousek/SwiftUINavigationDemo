@@ -9,22 +9,22 @@ import Combine
 import SwiftUI
 
 public final class NavigationStore: ObservableObject {
-    @Published public var navigationPath: [AnyHashable] = []
-    @Published public var rootNode: AnyHashable
+    @Published public var navigationPath: [any Node] = []
+    @Published public var rootNode: any Node
     public weak var parentNavigationStore: NavigationStore?
 
-    // displayed sheet cant be published property, otherwice on opening/closing sheet, the whole view will be redraws!
+    // displayed sheet cant be published property, otherwice on opening/closing sheet, the whole view will be redrawn!
     public let childSheetNavigationStore = CurrentValueSubject<NavigationStore?, Never>(nil)
 
     public init(
-        rootNode: AnyHashable,
+        rootNode: any Node,
         parentNavigationStore: NavigationStore?
     ) {
         self.rootNode = rootNode
         self.parentNavigationStore = parentNavigationStore
     }
 
-    public func openSheet(with sheetRoot: AnyHashable) {
+    public func openSheet(with sheetRoot: any Node) {
         childSheetNavigationStore.send(
             NavigationStore(
                 rootNode: sheetRoot,
@@ -41,15 +41,12 @@ public final class NavigationStore: ObservableObject {
 public extension NavigationStore {
     func handleNavigationEvent(event: Any) {
         navigationPath.reversed().forEach { node in
-            guard let node = node as? (any Node) else { return }
             if node.handleNavigationEvent(event: event, navigationStore: self) {
                 return
             }
         }
 
-        if let rootNode = rootNode as? any Node,
-           rootNode.handleNavigationEvent(event: event, navigationStore: self)
-        {
+        if rootNode.handleNavigationEvent(event: event, navigationStore: self) {
             return
         }
 
@@ -67,7 +64,6 @@ public extension NavigationStore {
         }
 
         for node in navigationPath.reversed() {
-            guard let node = node as? (any Node) else { return false }
             if node.handleDeeplink(deeplink: deeplink, navigationStore: self) {
                 childSheetNavigationStore.send(nil)
                 return true
@@ -76,9 +72,7 @@ public extension NavigationStore {
             }
         }
 
-        if let rootNode = rootNode as? any Node,
-           rootNode.handleDeeplink(deeplink: deeplink, navigationStore: self)
-        {
+        if rootNode.handleDeeplink(deeplink: deeplink, navigationStore: self) {
             childSheetNavigationStore.send(nil)
             return true
         }
@@ -90,18 +84,14 @@ public extension NavigationStore {
 public extension NavigationStore {
     func popToNode(node: any Node) {
         childSheetNavigationStore.send(nil)
-        guard let navigationPath = navigationPath as? [any Node] else { return }
-
         if navigationPath.contains(where: { $0.id == node.id }) {
             while navigationPath.count > 0, navigationPath.last?.id != node.id {
-                self.navigationPath = self.navigationPath.dropLast()
+                navigationPath = navigationPath.dropLast()
             }
             return
         }
-        if let rootNode = rootNode as? any Node,
-           rootNode.id == node.id
-        {
-            self.navigationPath = []
+        if rootNode.id == node.id {
+            navigationPath = []
             return
         }
 

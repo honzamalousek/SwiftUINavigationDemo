@@ -21,10 +21,17 @@ public struct NavRootView: View {
         self.navigationStore = navigationStore
     }
 
-    @State private var path: [String] = []
-
     public var body: some View {
-        NavigationStack(path: $navigationStore.navigationPath) {
+        NavigationStack(
+            path: .init(
+                get: { navigationStore.navigationPath.map{AnyHashable($0)}},
+                set: { input in
+                    navigationStore.navigationPath = input.compactMap {
+                        $0 as? any Node
+                    }
+                }
+            )
+        ) {
             ViewFactory().getView(for: navigationStore.rootNode)
                 .navigationDestination(for: AnyHashable.self) { destination in
                     ViewFactory().getView(for: destination)
