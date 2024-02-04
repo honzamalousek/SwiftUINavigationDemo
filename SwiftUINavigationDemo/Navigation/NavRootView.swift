@@ -15,7 +15,6 @@ import SwiftUI
 
 public struct NavRootView: View {
     @ObservedObject private var navigationStore: NavigationStore
-    @State var isSheetPresented = false
 
     init(navigationStore: NavigationStore) {
         self.navigationStore = navigationStore
@@ -37,11 +36,11 @@ public struct NavRootView: View {
                     ViewFactory().getView(for: destination)
                 }
         }
-        .onReceive(navigationStore.childSheetNavigationStore, perform: { displayedSheet in
-            isSheetPresented = displayedSheet != nil
-        })
-        .sheet(isPresented: $isSheetPresented) {
-            if let sheet = navigationStore.childSheetNavigationStore.value {
+        .sheet(isPresented: .init(
+            get: { navigationStore.childSheetNavigationStore != nil },
+            set: { _ in navigationStore.childSheetNavigationStore = nil }
+        )) {
+            if let sheet = navigationStore.childSheetNavigationStore {
                 NavRootView(navigationStore: sheet)
             }
         }

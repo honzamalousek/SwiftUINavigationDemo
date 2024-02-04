@@ -9,6 +9,7 @@ import SwiftUI
 
 public struct CategoriesView: View {
     @Environment(\.categoryCoordinator) private var coordinator: CategoriesCoordinatorLogic
+    @State private var counter = 1
     
     public init() {}
     
@@ -40,6 +41,15 @@ public struct CategoriesView: View {
                 }
             
             Spacer()
+            
+            Text("counter: \(counter)")
+                .onTapGesture {
+                    counter += 1
+                }
+                .padding()
+        }
+        .onAppear{
+            print("onAppear")
         }
         .frame(maxWidth: .infinity)
         .background(Color.blue)

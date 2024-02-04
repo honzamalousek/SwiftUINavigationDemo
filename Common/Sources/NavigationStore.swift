@@ -11,10 +11,9 @@ import SwiftUI
 public final class NavigationStore: ObservableObject {
     @Published public var navigationPath: [any Node] = []
     @Published public var rootNode: any Node
-    public weak var parentNavigationStore: NavigationStore?
+    @Published public var childSheetNavigationStore: NavigationStore?
 
-    // displayed sheet cant be published property, otherwice on opening/closing sheet, the whole view will be redrawn!
-    public let childSheetNavigationStore = CurrentValueSubject<NavigationStore?, Never>(nil)
+    public weak var parentNavigationStore: NavigationStore?
 
     public init(
         rootNode: any Node,
@@ -25,16 +24,14 @@ public final class NavigationStore: ObservableObject {
     }
 
     public func openSheet(with sheetRoot: any Node) {
-        childSheetNavigationStore.send(
-            NavigationStore(
-                rootNode: sheetRoot,
-                parentNavigationStore: self
-            )
+        childSheetNavigationStore = NavigationStore(
+            rootNode: sheetRoot,
+            parentNavigationStore: self
         )
     }
 
     public func closeSheet() {
-        parentNavigationStore?.childSheetNavigationStore.send(nil)
+        parentNavigationStore?.childSheetNavigationStore = nil
     }
 }
 
@@ -57,7 +54,7 @@ public extension NavigationStore {
 
 public extension NavigationStore {
     @discardableResult func handleDeeplink(deeplink: Any) -> Bool {
-        if let child = childSheetNavigationStore.value {
+        if let child = childSheetNavigationStore {
             if child.handleDeeplink(deeplink: deeplink) {
                 return true
             }
@@ -65,7 +62,7 @@ public extension NavigationStore {
 
         for node in navigationPath.reversed() {
             if node.handleDeeplink(deeplink: deeplink, navigationStore: self) {
-                childSheetNavigationStore.send(nil)
+                childSheetNavigationStore = nil
                 return true
             } else {
                 _ = navigationPath.popLast()
@@ -73,7 +70,7 @@ public extension NavigationStore {
         }
 
         if rootNode.handleDeeplink(deeplink: deeplink, navigationStore: self) {
-            childSheetNavigationStore.send(nil)
+            childSheetNavigationStore = nil
             return true
         }
 
@@ -83,7 +80,7 @@ public extension NavigationStore {
 
 public extension NavigationStore {
     func popToNode(node: any Node) {
-        childSheetNavigationStore.send(nil)
+        childSheetNavigationStore = nil
         if navigationPath.contains(where: { $0.id == node.id }) {
             while navigationPath.count > 0, navigationPath.last?.id != node.id {
                 navigationPath = navigationPath.dropLast()
