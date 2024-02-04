@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct HomescreenView: View {
-    @Environment(\.homescreenCoordinator) private var coordinator: HomescreenCoordinatorLogic
+    @Environment(\.homescreenRouter) private var router: HomescreenRouterLogic
     
     public init() {
     }
@@ -22,7 +22,7 @@ public struct HomescreenView: View {
             
             Text("categories")
                 .onTapGesture {
-                    coordinator.navigate(.categories)
+                    router.navigate(.categories)
                 }
             
             Spacer()

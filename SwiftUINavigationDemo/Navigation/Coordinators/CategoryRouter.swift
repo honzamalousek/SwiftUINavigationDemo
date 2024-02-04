@@ -1,5 +1,5 @@
 //
-//  CategoryCoordinator.swift
+//  CategoryRouter.swift
 //  SwiftUINavigationDemo
 //
 //  Created by Jan Maloušek on 24.01.2024.
@@ -9,7 +9,7 @@ import Foundation
 import Common
 import Categories
 
-extension NavigationStore: CategoriesCoordinatorLogic {
+extension NavigationStore: CategoriesRouterLogic {
     public func navigate(_ route: CategoriesRoute) {
         switch route {
         case .home:

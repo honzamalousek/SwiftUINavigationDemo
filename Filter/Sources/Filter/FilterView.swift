@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct FilterView: View {
-    @Environment(\.filterCoordinator) private var coordinator: FilterCoordinatorLogic
+    @Environment(\.filterRouter) private var router: FilterRouterLogic
     
     public init() {}
     
@@ -21,12 +21,12 @@ public struct FilterView: View {
             
             Text("close")
                 .onTapGesture {
-                    coordinator.navigate(.close)
+                    router.navigate(.close)
                 }
             
             Text("toFilterTagCollection")
                 .onTapGesture {
-                    coordinator.navigate(.toFilterTagCollection)
+                    router.navigate(.toFilterTagCollection)
                 }
             
             Spacer()

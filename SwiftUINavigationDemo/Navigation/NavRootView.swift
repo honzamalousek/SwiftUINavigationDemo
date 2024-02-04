@@ -44,10 +44,10 @@ public struct NavRootView: View {
                 NavRootView(navigationStore: sheet)
             }
         }
-        .environment(\.homescreenCoordinator, navigationStore)
-        .environment(\.categoryCoordinator, navigationStore)
-        .environment(\.articleDetailCoordinator, navigationStore)
-        .environment(\.filterCoordinator, navigationStore)
-        .environment(\.filterTagCollectionCoordinator, navigationStore)
+        .environment(\.homescreenRouter, navigationStore)
+        .environment(\.categoryRouter, navigationStore)
+        .environment(\.articleDetailRouter, navigationStore)
+        .environment(\.filterRouter, navigationStore)
+        .environment(\.filterTagCollectionRouter, navigationStore)
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct CategoriesView: View {
-    @Environment(\.categoryCoordinator) private var coordinator: CategoriesCoordinatorLogic
+    @Environment(\.categoryRouter) private var router: CategoriesRouterLogic
     @State private var counter = 1
     
     public init() {}
@@ -22,22 +22,22 @@ public struct CategoriesView: View {
             
             Text("back")
                 .onTapGesture {
-                    coordinator.navigate(.back)
+                    router.navigate(.back)
                 }
             
             Text("home")
                 .onTapGesture {
-                    coordinator.navigate(.home)
+                    router.navigate(.home)
                 }
             
             Text("articleDetail")
                 .onTapGesture {
-                    coordinator.navigate(.articleDetail(articleId: "123"))
+                    router.navigate(.articleDetail(articleId: "123"))
                 }
             
             Text("filter")
                 .onTapGesture {
-                    coordinator.navigate(.filter)
+                    router.navigate(.filter)
                 }
             
             Spacer()

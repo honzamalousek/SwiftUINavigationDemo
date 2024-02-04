@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct ArticleDetailView: View {
-    @Environment(\.articleDetailCoordinator) private var coordinator: ArticleDetailCoordinatorLogic
+    @Environment(\.articleDetailRouter) private var router: ArticleDetailRouterLogic
     @EnvironmentObject private var viewModel: ArticleDetailVM
     
     public init() {}
@@ -28,12 +28,12 @@ public struct ArticleDetailView: View {
             
             Text("back")
                 .onTapGesture {
-                    coordinator.navigate(.back)
+                    router.navigate(.back)
                 }
             
             Text("home")
                 .onTapGesture {
-                    coordinator.navigate(.home)
+                    router.navigate(.home)
                 }
             
             Spacer()
