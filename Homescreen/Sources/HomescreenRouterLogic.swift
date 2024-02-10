@@ -16,12 +16,6 @@ public enum HomescreenRoute: Hashable {
     case categories
 }
 
-class DefaultHomescreenRouter: HomescreenRouterLogic {
-    public func navigate(_ route: HomescreenRoute) {
-        assertionFailure()
-    }
-}
-
 public extension EnvironmentValues {
     var homescreenRouter: HomescreenRouterLogic {
         get { self[HomescreenRouterKey.self] }
@@ -31,4 +25,10 @@ public extension EnvironmentValues {
 
 struct HomescreenRouterKey: EnvironmentKey {
     static let defaultValue: HomescreenRouterLogic = DefaultHomescreenRouter()
+}
+
+class DefaultHomescreenRouter: HomescreenRouterLogic {
+    public func navigate(_ route: HomescreenRoute) {
+        assertionFailure()
+    }
 }

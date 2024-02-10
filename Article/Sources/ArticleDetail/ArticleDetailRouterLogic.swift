@@ -13,7 +13,6 @@ public protocol ArticleDetailRouterLogic: AnyObject {
 }
 
 public enum ArticleDetailRoute: Hashable {
-    case home
     case back
 }
 

@@ -13,18 +13,13 @@ public final class ArticleDetailVM: ObservableObject {
     
     // MARK: - Observed properties
     
-    @Published public var voucher: String = ""
+    @Published public var articleId: String = ""
     
     // MARK: - Lifecycle
     
     public init(
-        prefilledVoucher: String = ""
+        articleId: String = ""
     ) {
-        self.voucher = prefilledVoucher
-    }
-    
-    
-    public func setVoucher(voucher: String) {
-        self.voucher = voucher
+        self.articleId = articleId
     }
 }

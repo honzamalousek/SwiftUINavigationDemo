@@ -25,33 +25,14 @@ public struct CategoriesView: View {
                     router.navigate(.back)
                 }
             
-            Text("home")
-                .onTapGesture {
-                    router.navigate(.home)
-                }
-            
             Text("articleDetail")
                 .onTapGesture {
                     router.navigate(.articleDetail(articleId: "123"))
                 }
             
-            Text("filter")
-                .onTapGesture {
-                    router.navigate(.filter)
-                }
-            
             Spacer()
-            
-            Text("counter: \(counter)")
-                .onTapGesture {
-                    counter += 1
-                }
-                .padding()
-        }
-        .onAppear{
-            print("onAppear")
         }
         .frame(maxWidth: .infinity)
-        .background(Color.blue)
+        .background(Color.yellow)
     }
 }

@@ -7,13 +7,10 @@
 
 import Foundation
 import Article
-import Common
 
 extension NavigationStore: ArticleDetailRouterLogic {
     public func navigate(_ route: ArticleDetailRoute) {
         switch route {
-        case .home:
-            handleNavigationEvent(event: NavigationEvent.toHome)
         case .back:
             _ = navigationPath.popLast()
         }

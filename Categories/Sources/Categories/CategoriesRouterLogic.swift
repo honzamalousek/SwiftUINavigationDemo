@@ -13,10 +13,8 @@ public protocol CategoriesRouterLogic: AnyObject {
 }
 
 public enum CategoriesRoute: Hashable {
-    case home
     case back
     case articleDetail(articleId: String)
-    case filter
 }
 
 class DefaultCategoriesRouter: CategoriesRouterLogic {

@@ -7,7 +7,6 @@
 
 import Foundation
 import Homescreen
-import Common
 
 extension NavigationStore: HomescreenRouterLogic {
     public func navigate(_ route: HomescreenRoute) {

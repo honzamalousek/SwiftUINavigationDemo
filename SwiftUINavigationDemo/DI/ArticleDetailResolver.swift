@@ -14,10 +14,8 @@ import SwiftUI
 struct ArticleDetailResolver {
     func resolveView(articleNode: ArticleDetailNode) -> some View {
         let articleView = ArticleDetailView()
-        let viewModel = ArticleDetailVM(
-            prefilledVoucher: articleNode.prefilledVoucher
-        )
-//        articleNode.deeplinkHandlerFunction.send(viewModel.setVoucher)
+        let viewModel = ArticleDetailVM(articleId: articleNode.articleId)
+        
         return articleView
             .environmentObject(viewModel)
     }

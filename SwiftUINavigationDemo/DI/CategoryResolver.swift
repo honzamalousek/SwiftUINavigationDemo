@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 
 struct CategoryResolver {
-    func resolveView(id: String) -> some View {
+    func resolveView() -> some View {
         CategoriesView()
     }
 }

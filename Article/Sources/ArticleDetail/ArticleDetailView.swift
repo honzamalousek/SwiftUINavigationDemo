@@ -15,13 +15,10 @@ public struct ArticleDetailView: View {
     
     public var body: some View {
         VStack(spacing: 20) {
-            Text("ArticleView")
+            Text("ArticleView id: \(viewModel.articleId)")
                 .font(.title)
             
             Spacer()
-            
-            TextField("Gift voucher code", text: $viewModel.voucher)
-                .multilineTextAlignment(.center)
             
             Spacer()
                 .frame(height: 100)
@@ -29,11 +26,6 @@ public struct ArticleDetailView: View {
             Text("back")
                 .onTapGesture {
                     router.navigate(.back)
-                }
-            
-            Text("home")
-                .onTapGesture {
-                    router.navigate(.home)
                 }
             
             Spacer()
