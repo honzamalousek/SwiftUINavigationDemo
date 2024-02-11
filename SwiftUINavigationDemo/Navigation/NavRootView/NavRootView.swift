@@ -6,10 +6,9 @@
 //
 
 import Article
-import Categories
+import Category
 import Foundation
 import Homescreen
-
 import SwiftUI
 
 struct NavRootView: View {
@@ -22,8 +21,8 @@ struct NavRootView: View {
     var body: some View {
         NavigationStack(path: $navigationStore.navigationPath) {
             HomescreenView()
-                .navigationDestination(for: AnyHashable.self) { destination in
-                    ViewFactory().getView(for: destination)
+                .navigationDestination(for: AnyHashable.self) { node in
+                    ViewFactory().getView(for: node)
                 }
         }
         .environment(\.homescreenRouter, navigationStore)

@@ -12,7 +12,7 @@ public protocol ArticleDetailRouterLogic: AnyObject {
     func navigate(_ route: ArticleDetailRoute)
 }
 
-public enum ArticleDetailRoute: Hashable {
+public enum ArticleDetailRoute {
     case back
 }
 

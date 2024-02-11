@@ -5,12 +5,12 @@
 //  Created by Jan Maloušek on 24.01.2024.
 //
 
-import Categories
+import Category
 import Foundation
 import SwiftUI
 
 struct CategoryResolver {
     func resolveView() -> some View {
-        CategoriesView()
+        CategoryView()
     }
 }

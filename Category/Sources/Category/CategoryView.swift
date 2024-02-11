@@ -1,5 +1,5 @@
 //
-//  CategoriesView.swift
+//  CategoryView.swift
 //
 //
 //  Created by Jan Maloušek on 24.01.2024.
@@ -7,15 +7,14 @@
 
 import SwiftUI
 
-public struct CategoriesView: View {
-    @Environment(\.categoryRouter) private var router: CategoriesRouterLogic
-    @State private var counter = 1
+public struct CategoryView: View {
+    @Environment(\.categoryRouter) private var router: CategoryRouterLogic
     
     public init() {}
     
     public var body: some View {
         VStack(spacing: 20) {
-            Text("CategoriesView")
+            Text("CategoryView")
                 .font(.title)
             
             Spacer()
@@ -27,6 +26,7 @@ public struct CategoriesView: View {
             
             Text("articleDetail")
                 .onTapGesture {
+                    // navigate to articleDetail with passed parameter
                     router.navigate(.articleDetail(articleId: "123"))
                 }
             

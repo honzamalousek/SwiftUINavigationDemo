@@ -12,8 +12,8 @@ public protocol HomescreenRouterLogic: AnyObject {
     func navigate(_ route: HomescreenRoute)
 }
 
-public enum HomescreenRoute: Hashable {
-    case categories
+public enum HomescreenRoute {
+    case category
 }
 
 public extension EnvironmentValues {

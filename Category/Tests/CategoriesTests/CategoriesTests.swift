@@ -1,7 +1,7 @@
 import XCTest
-@testable import Categories
+@testable import Category
 
-final class CategoriesTests: XCTestCase {
+final class CategoryTests: XCTestCase {
     func testExample() throws {
         // XCTest Documentation
         // https://developer.apple.com/documentation/xctest

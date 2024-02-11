@@ -5,7 +5,7 @@
 //  Created by Jan Maloušek on 24.01.2024.
 //
 
-import Categories
+import Category
 import Foundation
 import Homescreen
 import SwiftUI

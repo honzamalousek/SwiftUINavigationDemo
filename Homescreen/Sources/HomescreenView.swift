@@ -10,19 +10,18 @@ import SwiftUI
 public struct HomescreenView: View {
     @Environment(\.homescreenRouter) private var router: HomescreenRouterLogic
     
-    public init() {
-    }
+    public init() {}
     
     public var body: some View {
-        VStack{
+        VStack {
             Text("Homescreen")
                 .font(.title)
             
             Spacer()
             
-            Text("categories")
+            Text("Category")
                 .onTapGesture {
-                    router.navigate(.categories)
+                    router.navigate(.category)
                 }
             
             Spacer()

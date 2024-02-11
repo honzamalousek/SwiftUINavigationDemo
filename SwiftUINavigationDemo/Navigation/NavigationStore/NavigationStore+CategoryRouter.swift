@@ -6,10 +6,10 @@
 //
 
 import Foundation
-import Categories
+import Category
 
-extension NavigationStore: CategoriesRouterLogic {
-    public func navigate(_ route: CategoriesRoute) {
+extension NavigationStore: CategoryRouterLogic {
+    public func navigate(_ route: CategoryRoute) {
         switch route {
         case .back:
             _ = navigationPath.popLast()

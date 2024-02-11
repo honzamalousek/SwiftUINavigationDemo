@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import Combine
 
 struct ArticleDetailNode: Hashable {
     let articleId: String

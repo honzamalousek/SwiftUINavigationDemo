@@ -6,7 +6,7 @@
 //
 
 import Article
-import Categories
+import Category
 import Foundation
 import SwiftUI
 

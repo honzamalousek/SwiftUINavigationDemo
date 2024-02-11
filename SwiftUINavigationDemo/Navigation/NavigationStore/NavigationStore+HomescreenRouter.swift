@@ -11,7 +11,7 @@ import Homescreen
 extension NavigationStore: HomescreenRouterLogic {
     public func navigate(_ route: HomescreenRoute) {
         switch route {
-        case .categories:
+        case .category:
             navigationPath.append(CategoryNode())
         }
     }
