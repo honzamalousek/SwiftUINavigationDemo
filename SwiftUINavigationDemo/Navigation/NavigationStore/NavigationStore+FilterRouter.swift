@@ -13,6 +13,8 @@ extension NavigationStore: FilterRouterLogic {
         switch route {
         case .close:
             closeSheet()
+        case .toFilterTagCollection:
+            navigationPath.append(FilterTagCollectionNode())
         }
     }
 }

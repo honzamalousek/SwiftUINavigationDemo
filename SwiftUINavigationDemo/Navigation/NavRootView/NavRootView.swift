@@ -21,22 +21,23 @@ struct NavRootView: View {
 
     var body: some View {
         NavigationStack(path: $navigationStore.navigationPath) {
-            HomescreenView()
+            ViewFactory().getView(for: navigationStore.rootNode)
                 .navigationDestination(for: AnyHashable.self) { node in
                     ViewFactory().getView(for: node)
                 }
         }
         .sheet(isPresented: .init(
-            get: { navigationStore.childSheetNode != nil },
-            set: { _ in navigationStore.childSheetNode = nil }
+            get: { navigationStore.childSheetNavigationStore != nil },
+            set: { _ in navigationStore.childSheetNavigationStore = nil }
         )) {
-            if let sheetNode = navigationStore.childSheetNode {
-                ViewFactory().getView(for: sheetNode)
+            if let sheetNavigationStore = navigationStore.childSheetNavigationStore {
+                NavRootView(navigationStore: sheetNavigationStore)
             }
         }
         .environment(\.homescreenRouter, navigationStore)
         .environment(\.categoryRouter, navigationStore)
         .environment(\.articleDetailRouter, navigationStore)
         .environment(\.filterRouter, navigationStore)
+        .environment(\.filterTagCollectionRouter, navigationStore)
     }
 }

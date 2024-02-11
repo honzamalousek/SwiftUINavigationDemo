@@ -24,10 +24,15 @@ public struct FilterView: View {
                     router.navigate(.close)
                 }
             
+            Text("toFilterTagCollection")
+                .onTapGesture {
+                    router.navigate(.toFilterTagCollection)
+                }
+            
             Spacer()
         }
         .padding()
         .frame(maxWidth: .infinity)
-        .background(Color.yellow)
+        .background(Color.gray)
     }
 }

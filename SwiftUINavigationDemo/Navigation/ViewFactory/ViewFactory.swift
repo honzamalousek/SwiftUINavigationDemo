@@ -16,12 +16,16 @@ public struct ViewFactory {
     @ViewBuilder
     func getView(for node: AnyHashable) -> some View {
         switch node {
+        case is HomescreenNode:
+            HomescreenResolver().resolveView()
         case is CategoryNode:
             CategoryResolver().resolveView()
         case let node as ArticleDetailNode:
             ArticleDetailResolver().resolveView(articleNode: node)
         case is FilterNode:
             FilterResolver().resolveView()
+        case is FilterTagCollectionNode:
+            FilterTagCollectionResolver().resolveView()
         default:
             Text("Error: No Destination")
         }

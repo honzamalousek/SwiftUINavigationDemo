@@ -9,16 +9,28 @@ import Combine
 import SwiftUI
 
 public final class NavigationStore: ObservableObject {
+    @Published public var rootNode: AnyHashable
     @Published public var navigationPath: [AnyHashable] = []
-    @Published public var childSheetNode: AnyHashable?
+    @Published public var childSheetNavigationStore: NavigationStore?
+    
+    public weak var parentNavigationStore: NavigationStore?
 
-    public init() {}
+    public init(
+        rootNode: AnyHashable,
+        parentNavigationStore: NavigationStore?
+    ) {
+        self.rootNode = rootNode
+        self.parentNavigationStore = parentNavigationStore
+    }
     
     func openSheet(with node: AnyHashable) {
-        childSheetNode = node
+        childSheetNavigationStore = NavigationStore(
+            rootNode: node,
+            parentNavigationStore: self
+        )
     }
     
     func closeSheet() {
-        childSheetNode = nil
+        parentNavigationStore?.childSheetNavigationStore = nil
     }
 }

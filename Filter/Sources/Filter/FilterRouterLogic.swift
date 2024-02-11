@@ -14,6 +14,7 @@ public protocol FilterRouterLogic: AnyObject {
 
 public enum FilterRoute {
     case close
+    case toFilterTagCollection
 }
 
 class DefaultFilterRouter: FilterRouterLogic {

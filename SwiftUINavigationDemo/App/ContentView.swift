@@ -9,6 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        NavRootView(navigationStore: NavigationStore())
+        NavRootView(
+            navigationStore: NavigationStore(
+                rootNode: HomescreenNode(),
+                parentNavigationStore: nil
+            )
+        )
     }
 }
