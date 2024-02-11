@@ -8,6 +8,7 @@
 import Category
 import Foundation
 import Homescreen
+import Filter
 import SwiftUI
 
 @MainActor
@@ -19,6 +20,8 @@ public struct ViewFactory {
             CategoryResolver().resolveView()
         case let node as ArticleDetailNode:
             ArticleDetailResolver().resolveView(articleNode: node)
+        case is FilterNode:
+            FilterResolver().resolveView()
         default:
             Text("Error: No Destination")
         }

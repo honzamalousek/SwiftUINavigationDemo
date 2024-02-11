@@ -7,6 +7,7 @@
 
 import Article
 import Category
+import Filter
 import Foundation
 import Homescreen
 import SwiftUI
@@ -25,8 +26,17 @@ struct NavRootView: View {
                     ViewFactory().getView(for: node)
                 }
         }
+        .sheet(isPresented: .init(
+            get: { navigationStore.childSheetNode != nil },
+            set: { _ in navigationStore.childSheetNode = nil }
+        )) {
+            if let sheetNode = navigationStore.childSheetNode {
+                ViewFactory().getView(for: sheetNode)
+            }
+        }
         .environment(\.homescreenRouter, navigationStore)
         .environment(\.categoryRouter, navigationStore)
         .environment(\.articleDetailRouter, navigationStore)
+        .environment(\.filterRouter, navigationStore)
     }
 }

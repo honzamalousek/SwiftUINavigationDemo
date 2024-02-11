@@ -15,6 +15,7 @@ public protocol CategoryRouterLogic: AnyObject {
 public enum CategoryRoute {
     case back
     case articleDetail(articleId: String)
+    case filterSheet
 }
 
 class DefaultCategoryRouter: CategoryRouterLogic {

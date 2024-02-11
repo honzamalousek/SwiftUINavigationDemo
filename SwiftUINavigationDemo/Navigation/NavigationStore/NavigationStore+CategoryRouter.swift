@@ -15,6 +15,8 @@ extension NavigationStore: CategoryRouterLogic {
             _ = navigationPath.popLast()
         case let .articleDetail(articleId):
             navigationPath.append(ArticleDetailNode(articleId: articleId))
+        case .filterSheet:
+            openSheet(with: FilterNode())
         }
     }
 }

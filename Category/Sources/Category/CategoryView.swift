@@ -26,8 +26,12 @@ public struct CategoryView: View {
             
             Text("articleDetail")
                 .onTapGesture {
-                    // navigate to articleDetail with passed parameter
                     router.navigate(.articleDetail(articleId: "123"))
+                }
+            
+            Text("open filter sheet")
+                .onTapGesture {
+                    router.navigate(.filterSheet)
                 }
             
             Spacer()
